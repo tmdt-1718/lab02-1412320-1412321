@@ -4,6 +4,7 @@ capybara-*.html
 /log
 /tmp
 /config/database.yml
+/config/environments/application_dev.yml
 /public/system
 /coverage/
 /spec/tmp
