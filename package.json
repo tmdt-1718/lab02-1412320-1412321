@@ -1,5 +1,10 @@
 {
   "name": "lab02-1412320-1412321",
   "private": true,
-  "dependencies": {}
+  "scripts": {
+    "start": "nodemon --watch config -e rb,yml --exec 'rails server'"
+  },
+  "dependencies": {
+    "nodemon": "^1.12.1"
+  }
 }
