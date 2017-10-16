@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   }
   resources :users, only: [ :member ] do
   	get 'home'
+    get :friendship
   end
+  resources :relationships, only: [:create, :destroy]
 end
