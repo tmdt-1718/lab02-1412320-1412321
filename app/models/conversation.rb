@@ -11,6 +11,12 @@ class Conversation < ApplicationRecord
     )
   end
 
+  def self.get_all(sender_id)
+    where(sender_id: sender_id).or(
+      where(recipient_id: sender_id)
+    )
+  end
+
   def self.get(sender_id, recipient_id)
     conversation = between(sender_id, recipient_id).first
     return conversation if conversation.present?

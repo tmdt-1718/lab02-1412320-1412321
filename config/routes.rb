@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     get :friendship
   end
   resources :relationships, only: [:create, :destroy, :update]
+  
+  resources :conversations, only: [:index]
 end

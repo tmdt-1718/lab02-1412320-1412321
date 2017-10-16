@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="conversation-box">
+        <div class="card border-primary">
+          <div class="card-header bg-primary text-white">
+            User list
+          </div>
+          <div class="conversation-single">
+            <div class="card-body">
+              <div class="card-title">
+                <%= gravatar_for(current_user, size: 40) %>
+                <h6><%= current_user.name %></h6>
+                <p class="card-text">
+                awknheduiwgfukasbhdgak
+                </p>
+                <hr/>
+              </div>
+              <%= render @conversations %>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="conversation-box">
+        <div class="card border-primary">
+          <div class="card-body" id="conversation-window">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
