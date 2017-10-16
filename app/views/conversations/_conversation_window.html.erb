@@ -1,5 +1,5 @@
 <div class="messages-list">
-  <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+  <%= render 'conversations/conversation_content', messages: conversation.messages.reverse, user: user %>
 </div>
 <%= form_for [conversation, conversation.messages.new], remote: true do |f| %>
   <%= f.hidden_field :user_id, value: user.id %>
