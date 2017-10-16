@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy, :update]
   
-  resources :conversations, only: [:index]
+  resources :conversations, only: [:index, :show] do
+    resources :messages, only: [:create]
+  end
 end

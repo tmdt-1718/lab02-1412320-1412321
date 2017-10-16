@@ -4,18 +4,10 @@
       <div class="conversation-box">
         <div class="card border-primary">
           <div class="card-header bg-primary text-white">
-            User list
+            Conversations list
           </div>
           <div class="conversation-single">
             <div class="card-body">
-              <div class="card-title">
-                <%= gravatar_for(current_user, size: 40) %>
-                <h6><%= current_user.name %></h6>
-                <p class="card-text">
-                awknheduiwgfukasbhdgak
-                </p>
-                <hr/>
-              </div>
               <%= render @conversations %>              
             </div>
           </div>

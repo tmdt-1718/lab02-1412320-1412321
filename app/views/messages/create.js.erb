@@ -1,0 +1,3 @@
+var conversation = $('#conversation-window');
+conversation.find('.messages-list').append("<%= j(render 'messages/message', message: @message, user: current_user) %>");
+conversation.find('textarea').val('');
