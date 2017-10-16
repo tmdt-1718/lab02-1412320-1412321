@@ -1,11 +1,15 @@
 <div class="<%= user.id == message.user_id ? 'row justify-content-end' : 'row justify-content-start' %>">
   <% unless current_user.id == message.user_id %>
     <%= gravatar_for(message.user, size: 30) %>
+  <% else %>
+    <%= localtime(message.created_at) %>
   <% end %>
   <div class="<%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
     <%= message.content %>
   </div>
   <% if current_user.id == message.user_id %>
     <%= gravatar_for(current_user, size: 30) %>
+  <% else %>
+    <%= localtime(message.created_at) %>
   <% end %>
 </div>
