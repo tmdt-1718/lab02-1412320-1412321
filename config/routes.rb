@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   	get 'home'
     get :friendship
   end
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy, :update]
 end

@@ -1,7 +1,16 @@
 <% unless current_user?(@user) %>
   <div id="friend_form">
-  <% if current_user.is_friend?(@user) %>
-    <%= render 'unfriend' %>
+  <% if @relationship %>
+    <% if current_user.is_pending?(@relationship.status) %>
+      <%= render 'pending' %>
+    <% elsif current_user.is_friend?(@relationship.status) %>
+      <%= render 'unfriend' %>
+      <% if current_user.is_block?(@relationship.status) %>
+        <%= render 'unblock' %>
+      <% else %>
+        <%= render 'block' %>
+      <% end %>
+    <% end %>
   <% else %>
     <%= render 'add_friend' %>
   <% end %>

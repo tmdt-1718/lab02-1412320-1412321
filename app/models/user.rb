@@ -19,8 +19,16 @@ class User < ApplicationRecord
     friendship.delete(other_user)
   end
 
+  def is_pending?(status)
+    status == 1
+  end
+
   # Returns true if the current user is a friend of the other user.
-  def is_friend?(other_user)
-    friendship.include?(other_user)
+  def is_friend?(status)
+    status == 2 || status == 3
+  end
+
+  def is_block?(status)
+    status == 3
   end
 end

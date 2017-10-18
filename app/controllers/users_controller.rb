@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 	def home
 		if params[:user_id]
       @user = User.find(params[:user_id])
+			@relationship = Relationship.find_by(user_two_id: params[:user_id])
     else
       @user = User.find(current_user.id)
     end
