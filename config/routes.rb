@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :messages, only: [:index, :sent] do
+  resources :messages, only: [:index, :sent, :show] do
     collection do
       get 'sent'
     end

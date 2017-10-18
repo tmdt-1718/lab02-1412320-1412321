@@ -22,6 +22,19 @@ class MessagesController < ApplicationController
     @messages = current_user.messages
   end
 
+  def show
+    begin
+      @message = Message.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      head 404
+    else
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+  end
+
   private
     def message_params
       params.require(:message).permit(:user_id, :content)
