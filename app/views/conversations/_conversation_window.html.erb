@@ -6,3 +6,12 @@
   <%= f.text_area :content, class: "form-control" %>
   <%= f.submit "Send", class: "btn btn-success" %>
 <% end %>
+
+<script>
+  $('div .message-sent').on('click', function(e){
+    $(this).parent().find('span').collapse('toggle');
+  })
+  $('div .message-recieved').on('click', function(e){
+    $(this).parent().find('span').collapse('toggle');
+  })
+</script>

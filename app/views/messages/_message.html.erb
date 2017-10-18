@@ -2,14 +2,17 @@
   <% unless current_user.id == message.user_id %>
     <%= gravatar_for(message.user, size: 30) %>
   <% else %>
-    <%= localtime(message.created_at) %>
+    <span class='time'><%= localtime(message.created_at) %></span>
   <% end %>
-  <div class="<%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
-    <%= message.content %>
+  <div>
+    <div data-message-id="<%= message.id %>" class="<%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
+      <%= message.content %>
+    </div>
+    <span class="time collapse" data-message-id="<%= message.id %>">Seen at <%= localtime(message.created_at) %></span>  
   </div>
   <% if current_user.id == message.user_id %>
     <%= gravatar_for(current_user, size: 30) %>
   <% else %>
-    <%= localtime(message.created_at) %>
+    <span class='time'><%= localtime(message.created_at) %></span>
   <% end %>
 </div>

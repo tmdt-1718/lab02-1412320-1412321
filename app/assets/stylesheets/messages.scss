@@ -12,6 +12,10 @@
   .time{
     font-size: 0.75em;
     margin-top: 30px; 
+    &.collapse{
+      margin-top: 0px;
+      clear: both;
+    }
   }
 }
 
@@ -21,6 +25,8 @@
   margin: 5px 10px;
   padding: 10px;
   border-radius: 20px;
+  width: fit-content;
+  float: left;
 }
  
 .message-sent {
@@ -28,13 +34,21 @@
   border-color: #BCE8F1;
   margin: 5px 10px;
   padding: 10px;
-  border-radius: 20px;  
+  border-radius: 20px; 
+  width: fit-content;  
+  float: right;
 }
 
 .justify-content-end{
   .gravatar{
     margin-top: 10px; 
     height: 30px;
+  }
+  .collapse{
+    text-align:right;
+  }
+  .collapsing{
+    display: none;
   }
 }
 
@@ -43,6 +57,12 @@
     margin-top: 10px; 
     height: 30px;
     margin-left: 20px;
+  }
+  .collapse{
+    text-align:left;
+  }
+  .collapsing{
+    display: none;    
   }
 }
  
