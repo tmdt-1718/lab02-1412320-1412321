@@ -13,4 +13,10 @@ Rails.application.routes.draw do
   resources :conversations, only: [:index, :show] do
     resources :messages, only: [:create]
   end
+
+  resources :messages, only: [:index, :sent] do
+    collection do
+      get 'sent'
+    end
+  end
 end

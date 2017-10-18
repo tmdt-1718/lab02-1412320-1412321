@@ -65,4 +65,38 @@
     display: none;    
   }
 }
- 
+
+.menu {
+  .card-title {
+    padding-left: 10px;
+    margin-bottom: 5px;
+    &:hover {
+      background-color: rgb(233, 233, 233);      
+    }
+  }
+}
+
+#message-window {
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 0.95rem;
+  tr{
+    td {
+      padding: 8px;
+      &:first-child {
+        width: 200px;
+        max-width: 200px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      &:nth-child(2) {
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 570px;
+      }
+      &:nth-child(3){
+        text-align: right;
+      }
+    }
+  }
+}

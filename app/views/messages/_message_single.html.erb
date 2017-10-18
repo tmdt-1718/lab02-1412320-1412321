@@ -1,0 +1,5 @@
+<tr onclick="showMessage('<%= message.id %>')">
+  <td><%= message.user.name %></td>
+  <td><%= message.content %></td>
+  <td><%= localtime message.created_at %></td>
+</tr>

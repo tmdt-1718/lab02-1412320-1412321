@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <div class="conversation-box">
+        <div class="card border-primary">
+          <div class="card-body">
+            <div class="menu">
+              <div class="card-title" id="inbox">Inbox (21)</div>
+              <div class="card-title" id="sent">Sent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="conversation-box">
+        <div class="card border-primary">
+          <div class="card-body" id="message-window">
+            <%= render 'message_list' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
