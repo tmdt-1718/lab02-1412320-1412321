@@ -4,13 +4,14 @@ class RelationshipsController < ApplicationController
   #status 2: friend
   #status 3: block
   def create
-    current_user.add_friend(User.find(params[:user_two_id]))
-    relationship = Relationship.between(current_user.id, params[:user_two_id]).first
-    relationship.status = 1
-    # relationship.action_user_id = current_user.id
-    relationship.save
-    friend = User.find_friend(current_user, relationship)
-    redirect_to user_home_path(user_id: friend)
+    unless Relationship.between(current_user.id, params[:user_two_id]).first
+      current_user.add_friend(User.find(params[:user_two_id]))
+      relationship = Relationship.between(current_user.id, params[:user_two_id]).first
+      relationship.status = 1
+      relationship.save
+      friend = User.find_friend(current_user, relationship)
+      redirect_to user_home_path(user_id: friend)
+    end
   end
 
   def update

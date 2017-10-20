@@ -1,7 +1,9 @@
-<% @relationships.each do |friend| %>
-  <% if friend.user_one_id == @user.id %>
-    <%= gravatar_for(friend.user_two, size: 30) %><%= friend.user_two.name %><br/>
-  <% else %>
-    <%= gravatar_for(friend.user_one, size: 30) %><%= friend.user_one.name %><br/>
+<% @relationships.each do |relationship| %>
+  <% if relationship.status > 1 %>
+    <% if relationship.user_one_id == @user.id %>
+      <%= gravatar_for(relationship.user_two, size: 30) %><%= relationship.user_two.name %><br/>
+    <% else %>
+      <%= gravatar_for(relationship.user_one, size: 30) %><%= relationship.user_one.name %><br/>
+    <% end %>
   <% end %>
 <% end %>
