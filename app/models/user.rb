@@ -31,12 +31,12 @@ class User < ApplicationRecord
   end
 
   # Returns true if the current user is a friend of the other user.
-  def is_friend?(status)
-    status == 2 || status == 3
+  def is_friend?(relationship)
+    relationship.status == 2 || relationship.status == 3
   end
 
-  def is_block?(status)
-    status == 3
+  def is_block?(relationship)
+    (relationship.status == 3) && ((relationship.block_id == self.id) || (relationship.block_id == -1))
   end
 
   def self.find_friend(user, relationship)

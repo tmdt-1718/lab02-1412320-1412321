@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
     current_user.add_friend(User.find(params[:user_two_id]))
     relationship = Relationship.between(current_user.id, params[:user_two_id]).first
     relationship.status = 1
-    relationship.action_user_id = current_user.id
+    # relationship.action_user_id = current_user.id
     relationship.save
     friend = User.find_friend(current_user, relationship)
     redirect_to user_home_path(user_id: friend)
@@ -15,16 +15,20 @@ class RelationshipsController < ApplicationController
 
   def update
     relationship = Relationship.find(params[:id])
-    if relationship.status == 1
-      relationship.update(status: 2, action_user_id: current_user.id)
-    elsif relationship.status == 2
-      relationship.update(status: 3, action_user_id: current_user.id)
-    elsif relationship.status == 3
-      relationship.update(status: 2, action_user_id: current_user.id)
-    else
-      relationship.update(status: 1)
-    end
     friend = User.find_friend(current_user, relationship)
+    if relationship.status == 1
+      relationship.update(status: 2)
+    elsif relationship.status == 2
+      relationship.update(status: 3, block_id: current_user.id)
+    else
+      if current_user.id == relationship.block_id
+        relationship.update(status: 2, block_id: nil)
+      elsif relationship.block_id == -1
+        relationship.update(status: 3, block_id: friend)
+      else
+        relationship.update(status: 3, block_id: -1)
+      end
+    end
     redirect_to user_home_path(user_id: friend)
   end
 
