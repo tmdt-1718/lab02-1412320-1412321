@@ -1,0 +1,73 @@
+// Place all the styles related to the conversations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.conversation-box{
+  .card{
+    min-height: 90vh;
+    max-height: 90vh;
+  }
+  &:nth-child(2){
+    padding: 0px;
+  }
+}
+
+.col-8 {
+  padding-left: 0px !important;
+}
+.col-10 {
+  padding-left: 0px !important;
+}
+
+.col-4 {
+  padding-right: 0px !important;
+}
+.col-2 {
+  padding-right: 0px !important;
+}
+
+body{
+  ::-webkit-scrollbar-track {
+    width: 6px;
+    height: 6px;
+    background-color: #D5D5D5;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #D5D5D5;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: 6px;
+    height: 6px;
+    border-radius: 12px;
+    background-color: #B3B3B3;
+  }
+}
+
+.conversation-single{
+  .card-body{
+    padding: 0.5em;
+  }
+  height: 100%;
+  .gravatar{
+    float: left;
+    margin-right: 10px;
+  }
+  p{
+    font-size: 0.9em;
+    line-height: 1.0em;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  overflow-y: scroll;
+  overflow-x: hidden;
+  .card-title{
+    padding: 0.5em;
+    padding-bottom: 0em;
+    &:hover{
+      background-color: rgb(247, 247, 247);
+    }
+  }
+}

@@ -1,0 +1,10 @@
+if($('#conversation-window') > 0) {
+  var conversation = $('#conversation-window');
+  conversation.find('.messages-list').append("<%= j(render 'messages/message', message: @message, user: current_user) %>");
+  conversation.find('textarea').val('');  
+} else {
+  var new_box = $('#new-message').modal('toggle');
+  new_box.find('textarea').val('');
+  $.getScript('/messages');
+}
+

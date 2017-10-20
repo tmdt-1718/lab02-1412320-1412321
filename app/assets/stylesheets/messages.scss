@@ -1,0 +1,121 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.messages-list {
+  min-height: 350px;
+  max-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .row {
+    max-width: 100%;    
+  }
+  .time{
+    font-size: 0.75em;
+    margin-top: 30px; 
+    &.collapse{
+      margin-top: 0px;
+      clear: both;
+    }
+  }
+}
+
+.message-received {
+  background-color: rgb(197, 197, 197);
+  border-color: rgb(197, 197, 197);
+  margin: 5px 10px;
+  padding: 10px;
+  border-radius: 20px;
+  width: fit-content;
+  float: left;
+}
+ 
+.message-sent {
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+  margin: 5px 10px;
+  padding: 10px;
+  border-radius: 20px; 
+  width: fit-content;  
+  float: right;
+}
+
+.justify-content-end{
+  .gravatar{
+    margin-top: 10px; 
+    height: 30px;
+  }
+  .collapse{
+    text-align:right;
+  }
+  .collapsing{
+    display: none;
+  }
+}
+
+.justify-content-start{
+  .gravatar{
+    margin-top: 10px; 
+    height: 30px;
+    margin-left: 20px;
+  }
+  .collapse{
+    text-align:left;
+  }
+  .collapsing{
+    display: none;    
+  }
+}
+
+.menu {
+  .card-title {
+    padding: 5px 0px 5px 10px;
+    margin-bottom: 5px;
+    &:hover {
+      background-color: rgb(233, 233, 233);      
+    }
+  }
+}
+
+#message-window {
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 0.95rem;
+  tr{
+    td {
+      padding: 8px;
+      &:first-child {
+        width: 200px;
+        max-width: 200px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      &:nth-child(2) {
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 530px;
+      }
+      &:nth-child(3){
+        text-align: right;
+      }
+    }
+  }
+  .card-text p{
+    color: black;
+  }
+}
+
+#new-message{
+  .modal-content{
+    padding-top: 20px;
+    textarea{
+      height: 400px;
+    }
+  }  
+}
+
+#compose {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+  margin-bottom: 15px; 
+}

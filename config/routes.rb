@@ -9,4 +9,14 @@ Rails.application.routes.draw do
     get :friendship
   end
   resources :relationships, only: [:create, :destroy, :update]
+  
+  resources :conversations, only: [:index, :show] do
+    resources :messages, only: [:create]
+  end
+
+  resources :messages, only: [:index, :sent, :show, :create] do
+    collection do
+      get 'sent'
+    end
+  end
 end

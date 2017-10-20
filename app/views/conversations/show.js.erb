@@ -1,0 +1,11 @@
+var conversation = $("#conversation-window");
+ 
+if (conversation.length !== 0) {
+  conversation.html("<%= j(render 'conversations/conversation_window', conversation: @conversation, user: current_user) %>");
+}
+ 
+var messages_list = conversation.find('.messages-list');
+if(messages_list[0] != null){
+  var height = messages_list[0].scrollHeight;
+  messages_list.scrollTop(height);  
+}

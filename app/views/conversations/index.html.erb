@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="conversation-box">
+        <div class="card border-primary">
+          <div class="card-header bg-primary text-white">
+            Conversations list
+          </div>
+          <div class="conversation-single">
+            <div class="card-body">
+              <%= render @conversations %>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="conversation-box">
+        <div class="card border-primary">
+          <div class="card-body" id="conversation-window">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

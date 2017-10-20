@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :friendship, through: :active_relationships, source: :user_two
   has_many :friendship_back, through: :passive_relationships, source: :user_one
 
+  has_many :messages, dependent: :destroy
+  
   # Add friend with a user.
   def add_friend(other_user)
     friendship << other_user

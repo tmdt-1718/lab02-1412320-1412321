@@ -1,0 +1,12 @@
+<div class="card-title" onclick="getConversation('<%= conversation.id %>')">
+  <%= gravatar_for(conversation.opposed_user(current_user), size: 40) %>
+  <h6><%= conversation.opposed_user(current_user).name %></h6>
+  <p class="card-text">
+    <% if conversation.messages.first %>
+      <%= conversation.messages.first.content %>
+    <% else %>
+      <%= 'Send new messages' %>
+    <% end %>
+  </p>
+  <hr/>
+</div>
