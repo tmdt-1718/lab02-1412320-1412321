@@ -4,34 +4,36 @@ class RelationshipsController < ApplicationController
   #status 2: friend
   #status 3: block
   def create
-    friend = User.find(params[:user_two_id])
-    current_user.add_friend(friend)
-    relationship = Relationship.find_by(user_two_id: params[:user_two_id])
+    current_user.add_friend(User.find(params[:user_two_id]))
+    relationship = Relationship.between(current_user.id, params[:user_two_id]).first
     relationship.status = 1
     relationship.action_user_id = current_user.id
     relationship.save
-    redirect_to user_home_path(user_id: friend.id)
+    friend = User.find_friend(current_user, relationship)
+    redirect_to user_home_path(user_id: friend)
   end
 
   def update
     relationship = Relationship.find(params[:id])
     if relationship.status == 1
-      relationship.update(status: 2)
+      relationship.update(status: 2, action_user_id: current_user.id)
     elsif relationship.status == 2
-      relationship.update(status: 3)
+      relationship.update(status: 3, action_user_id: current_user.id)
     elsif relationship.status == 3
-      relationship.update(status: 2)
+      relationship.update(status: 2, action_user_id: current_user.id)
     else
       relationship.update(status: 1)
     end
-    redirect_to user_home_path(user_id: relationship.user_two_id)
+    friend = User.find_friend(current_user, relationship)
+    redirect_to user_home_path(user_id: friend)
   end
 
 
   def destroy
-    friend = Relationship.find(params[:id]).user_two
-    current_user.unfriend(friend)
-    redirect_to user_home_path(user_id: friend.id)
+    relationship = Relationship.find(params[:id])
+    friend = User.find_friend(current_user, relationship)
+    current_user.unfriend(User.find(friend))
+    redirect_to user_home_path(user_id: friend)
   end
 
   private

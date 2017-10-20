@@ -2,7 +2,11 @@
   <div id="friend_form">
   <% if @relationship %>
     <% if current_user.is_pending?(@relationship.status) %>
-      <%= render 'pending' %>
+      <% if @relationship.action_user_id == current_user.id %>
+        <%= render 'pending' %>
+      <% else %>
+        <%= render 'accept' %>
+      <% end %>
     <% elsif current_user.is_friend?(@relationship.status) %>
       <%= render 'unfriend' %>
       <% if current_user.is_block?(@relationship.status) %>

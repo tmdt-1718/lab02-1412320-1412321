@@ -1,3 +1,4 @@
 <p>This is <%= @user.name %> home page</p>
-<p><%= @user.friendship.count %></p>
+<p><%= @relationships.length %></p>
 <%= render 'friend_form' if logged_in? %>
+<%= render 'friend' %>
