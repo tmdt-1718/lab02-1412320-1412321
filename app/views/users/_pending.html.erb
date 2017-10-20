@@ -1,0 +1,5 @@
+<% if a = current_user.active_relationships.find_by(user_two_id: @user.id) %>
+  <%= form_for(a, html: { method: :delete }) do |f| %>
+    <%= f.submit "Cancel request", class: "btn" %>
+  <% end %>
+<% end %>
