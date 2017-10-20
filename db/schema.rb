@@ -12,18 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20171020181738) do
 
-  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_one_id"
-    t.integer "user_two_id"
-    t.integer "status", limit: 1
-    t.integer "block_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_one_id", "user_two_id"], name: "index_relationships_on_user_one_id_and_user_two_id", unique: true
-    t.index ["user_one_id"], name: "index_relationships_on_user_one_id"
-    t.index ["user_two_id"], name: "index_relationships_on_user_two_id"
-  end
-  
   create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "sender_id"
     t.integer "recipient_id"
@@ -42,6 +30,18 @@ ActiveRecord::Schema.define(version: 20171020181738) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_one_id"
+    t.integer "user_two_id"
+    t.integer "status", limit: 1
+    t.integer "block_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_one_id", "user_two_id"], name: "index_relationships_on_user_one_id_and_user_two_id", unique: true
+    t.index ["user_one_id"], name: "index_relationships_on_user_one_id"
+    t.index ["user_two_id"], name: "index_relationships_on_user_two_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

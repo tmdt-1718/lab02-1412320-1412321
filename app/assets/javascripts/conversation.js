@@ -12,4 +12,8 @@ $(document).on('turbolinks:load', function(){
   var conversation = $('.conversation-single').find('.card-title');
   if(conversation.length > 0)
     conversation[0].click();
+
+  $('#compose').click(function(){
+    $('#new-message').modal('show');
+  })
 })
