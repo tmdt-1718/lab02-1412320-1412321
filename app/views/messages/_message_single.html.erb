@@ -1,5 +1,9 @@
-<tr onclick="showMessage(<%= message.id %>)">
+<% if ( message.user != current_user ) && !message.seen_at %>
+  <tr onclick="showMessage(<%= message.id %>)" class="unseen">
+<% else %>
+  <tr onclick="showMessage(<%= message.id %>)">  
+<% end %>
   <td><%= message.user.name %></td>
   <td><%= message.content %></td>
-  <td><%= time_ago_in_words message.created_at %></td>
+  <td><%= time_ago_in_words message.created_at %> ago</td>
 </tr>

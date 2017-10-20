@@ -36,9 +36,13 @@ class MessagesController < ApplicationController
   def show
     begin
       @message = Message.find(params[:id])
+      @recipient = @message.conversation.opposed_user(@message.user)
     rescue ActiveRecord::RecordNotFound => e
       head 404
     else
+      if (@message.user != current_user) && (!@message.seen_at) 
+        @message.update(seen_at: DateTime.now)
+      end
       respond_to do |format|
         format.html
         format.js
