@@ -13,7 +13,7 @@ class RelationshipsController < ApplicationController
       relationship.save
     end
     friend = User.find_friend(current_user, relationship)
-    redirect_to user_home_path(user_id: friend)
+    redirect_to friendlist_path
   end
 
   def update
@@ -32,7 +32,7 @@ class RelationshipsController < ApplicationController
           @relationship.update(status: 3, block_id: -1)
         end
       end
-      redirect_to user_home_path(user_id: friend)
+      redirect_to friendlist_path
   end
 
 
@@ -40,7 +40,7 @@ class RelationshipsController < ApplicationController
     relationship = Relationship.find(params[:id])
     friend = User.find_friend(current_user, relationship)
     current_user.unfriend(User.find(friend))
-    redirect_to user_home_path(user_id: friend)
+    redirect_to friendlist_path
   end
 
   private

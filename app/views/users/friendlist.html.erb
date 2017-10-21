@@ -1,0 +1,53 @@
+<div class="my-container">
+  <section id="team" class="section team">
+    <div class="container">
+      <header class="section-heading">
+        <h3>Number of friend:
+          <%= User.friend_num(@relationships) %></h3>
+      </header>
+
+      <div class="section-content">
+        <div class="row">
+          <% @users.each do |user| %>
+          <% @relationship = Relationship.between(current_user.id, user.id).first %>
+          <% unless user == current_user %>
+          <div class="col-sm-3 lborder rborder">
+
+            <div class="team-bio">
+              <figure>
+                <div style="text-align: center">
+                  <%= gravatar_for(user, size: 100)%>
+                </div>
+
+              </figure>
+              <div class="team-description">
+                <div class="member-name"><%= user.name %></div>
+                <% if @relationship %>
+                  <% if @relationship.status > 1 %>
+                    <div class="designation">Friend since:
+                      <%= @relationship.created_at.strftime("%d/%m/%Y") %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <div class="team-social">
+                <% if @relationship %>
+                  <%= render 'friend_form' %>
+                <% else %>
+                  <%= form_for(current_user.active_relationships.build) do |f| %>
+                    <div><%= hidden_field_tag :user_two_id, user.id %></div>
+                  <%= f.submit "Add friend", class: "btn btn-primary btn-block" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

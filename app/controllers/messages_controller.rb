@@ -7,8 +7,14 @@ class MessagesController < ApplicationController
       @message = @conversation.messages.create(message_params)
     else
       content = params[:message][:content]
+      recipient = User.find(params[:message][:user_id])
       @conversation = Conversation.get(current_user.id, params[:message][:user_id])
-      @message = @conversation.messages.create(content: content, user: current_user)      
+      @relationship = Relationship.between(recipient, current_user).first
+      if (@relationship.status == 3) && (@relationship.block_id.to_s == params[:message][:user_id] || @relationship.block_id == -1)
+        redirect_to messages_path, alert: "You have been blocked by #{recipient.name}" and return
+      else
+        @message = @conversation.messages.create(content: content, user: current_user)
+      end
     end
 
     respond_to do |format|
@@ -23,7 +29,7 @@ class MessagesController < ApplicationController
     if (session[:show_message])
       @message = Message.find(session[:show_message])
       @recipient = @message.conversation.opposed_user(@message.user)
-      session[:show_message] = nil     
+      session[:show_message] = nil
     else
       # For loading messages
       conversations = Conversation.get_all(current_user.id)
@@ -37,7 +43,12 @@ class MessagesController < ApplicationController
     end
     # For create new message
     @new_message = Message.new
-    @users = User.where.not(id: current_user.id)
+    @users = Array.new
+    @relationships = Relationship.includes(:user_one).where("user_one_id = ? or user_two_id = ?", current_user.id, current_user.id)
+    @relationships.each do |relationship|
+      friend = User.find_friend(current_user, relationship)
+      @users << User.find(friend)
+    end
 
     respond_to do |format|
       format.html
@@ -50,8 +61,8 @@ class MessagesController < ApplicationController
   end
 
   def show
-    if (@message.user != current_user) && (!@message.seen_at) 
-      MessageMailer.seen_notice(@recipient, @message).deliver_later    
+    if (@message.user != current_user) && (!@message.seen_at)
+      MessageMailer.seen_notice(@recipient, @message).deliver_later
       @message.update(seen_at: DateTime.now)
     end
     respond_to do |format|
@@ -75,7 +86,7 @@ class MessagesController < ApplicationController
       rescue ActiveRecord::RecordNotFound => e
         respond_to do |format|
           format.html do
-            redirect_to '/404' and return         
+            redirect_to '/404' and return
           end
           format.js do
             head 404
@@ -85,6 +96,6 @@ class MessagesController < ApplicationController
         if (@message.user != current_user) && (@recipient != current_user)
           redirect_to '/404' and return
         end
-      end        
+      end
     end
 end

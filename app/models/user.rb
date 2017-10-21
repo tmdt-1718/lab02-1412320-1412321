@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :friendship_back, through: :passive_relationships, source: :user_one
 
   has_many :messages, dependent: :destroy
-  
+
   # Add friend with a user.
   def add_friend(other_user)
     friendship << other_user
@@ -50,4 +50,14 @@ class User < ApplicationRecord
 			end
 		end
 	end
+
+  def self.friend_num(relationships)
+		friend_num = 0
+		relationships.each do |relationship|
+			if relationship.status > 1
+				friend_num += 1
+			end
+		end
+    friend_num
+  end
 end
