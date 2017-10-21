@@ -1,5 +1,3 @@
-<% if a = current_user.passive_relationships.find_by(user_one_id: @user.id) %>
-  <%= form_for(a, html: { method: :put }) do |f| %>
-    <%= f.submit "Accept request", class: "btn btn-primary" %>
-  <% end %>
+<%= form_for(@relationship, html: { method: :put }) do |f| %>
+  <%= f.submit "Accept request", class: "btn btn-primary" %>
 <% end %>

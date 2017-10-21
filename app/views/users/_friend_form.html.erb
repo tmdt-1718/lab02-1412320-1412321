@@ -1,5 +1,4 @@
-<% unless current_user?(@user) %>
-  <div id="friend_form">
+<div id="friend_form">
   <% if @relationship %>
     <% if current_user.is_pending?(@relationship.status) %>
       <% if @relationship.user_one_id == current_user.id %>
@@ -8,15 +7,15 @@
         <%= render 'accept' %>
       <% end %>
     <% elsif current_user.is_friend?(@relationship) %>
+    <div class="d-flex justify-content-center">
       <%= render 'unfriend' %>
       <% if current_user.is_block?(@relationship) %>
         <%= render 'unblock' %>
       <% else %>
         <%= render 'block' %>
       <% end %>
+    </div>
     <% end %>
-  <% else %>
-    <%= render 'add_friend' %>
+
   <% end %>
-  </div>
-<% end %>
+</div>

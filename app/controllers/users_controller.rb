@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       @user = current_user
 			user_id = current_user.id
     end
-
+		@users = User.all
 		@relationships = Relationship.where("user_one_id = ? or user_two_id = ?", user_id, user_id)
 	end
 
