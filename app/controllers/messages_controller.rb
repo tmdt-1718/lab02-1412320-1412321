@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
       if (@relationship.status == 3) && (@relationship.block_id.to_s == params[:message][:user_id] || @relationship.block_id == -1)
         redirect_to messages_path, alert: "You have been blocked by #{recipient.name}" and return
       else
-        @message = @conversation.messages.create(content: content, user: current_user)
+        @message = @conversation.messages.create(content: content, user: current_user, image: params[:message][:image])
       end
     end
 
