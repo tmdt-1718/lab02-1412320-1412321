@@ -16,14 +16,20 @@ class MessagesController < ApplicationController
   end
 
   def index
-    # For loading messages
-    conversations = Conversation.get_all(current_user.id)
-    @messages = conversations.collect(&:messages)
-    @messages.flatten!.uniq!
-    @messages.delete_if { |message| message.user == current_user }
-    @messages.sort!{ |a, b| b.created_at <=> a.created_at }
+    if (session[:show_message])
+      @message = Message.find(session[:show_message])
+      @recipient = @message.conversation.opposed_user(@message.user)
+      session[:show_message] = nil     
+    else
+      # For loading messages
+      conversations = Conversation.get_all(current_user.id)
+      @messages = conversations.collect(&:messages)
+      @messages.flatten!.uniq!
+      @messages.delete_if { |message| message.user == current_user }
+      @messages.sort!{ |a, b| b.created_at <=> a.created_at }
+    end
     # For create new message
-    @message = Message.new
+    @new_message = Message.new
     @users = User.where.not(id: current_user.id)
 
     respond_to do |format|
@@ -42,6 +48,7 @@ class MessagesController < ApplicationController
     end
     respond_to do |format|
       format.html do
+        session[:show_message] = @message.id
         redirect_to messages_path
       end
       format.js
@@ -58,7 +65,14 @@ class MessagesController < ApplicationController
         @message = Message.find(params[:id])
         @recipient = @message.conversation.opposed_user(@message.user)
       rescue ActiveRecord::RecordNotFound => e
-        head 404
+        respond_to do |format|
+          format.html do
+            redirect_to '/404' and return         
+          end
+          format.js do
+            head 404
+          end
+        end
       else
         if (@message.user != current_user) && (@recipient != current_user)
           redirect_to '/404' and return
