@@ -7,8 +7,14 @@ class MessagesController < ApplicationController
       @message = @conversation.messages.create(message_params)
     else
       content = params[:message][:content]
+      recipient = User.find(params[:message][:user_id])
       @conversation = Conversation.get(current_user.id, params[:message][:user_id])
-      @message = @conversation.messages.create(content: content, user: current_user)
+      @relationship = Relationship.between(recipient, current_user).first
+      if (@relationship.status == 3) && (@relationship.block_id.to_s == params[:message][:user_id] || @relationship.block_id == -1)
+        redirect_to messages_path, alert: "You have been blocked by #{recipient.name}" and return
+      else
+        @message = @conversation.messages.create(content: content, user: current_user)
+      end
     end
 
     respond_to do |format|
