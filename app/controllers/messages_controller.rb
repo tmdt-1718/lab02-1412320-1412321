@@ -4,12 +4,16 @@ class MessagesController < ApplicationController
   def create
     if(params[:conversation_id])
       @conversation = Conversation.includes(:recipient).find(params[:conversation_id])
+      @message = @conversation.messages.create(message_params)
     else
+      content = params[:message][:content]
       @conversation = Conversation.get(current_user.id, params[:message][:user_id])
+      @message = @conversation.messages.create(content: content, user: current_user)      
     end
 
-    @message = @conversation.messages.create(message_params)
     respond_to do |format|
+      recipient = @conversation.opposed_user(current_user)
+      MessageMailer.sent_notice(recipient, @message).deliver_later
       format.js
     end
 
@@ -44,6 +48,7 @@ class MessagesController < ApplicationController
 
   def show
     if (@message.user != current_user) && (!@message.seen_at) 
+      MessageMailer.seen_notice(@recipient, @message).deliver_later    
       @message.update(seen_at: DateTime.now)
     end
     respond_to do |format|
