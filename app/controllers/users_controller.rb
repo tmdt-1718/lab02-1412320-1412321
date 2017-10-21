@@ -14,11 +14,22 @@ class UsersController < ApplicationController
 			@relationship = Relationship.where("user_one_id = ? or user_two_id = ?", user_id, user_id).first
     end
 
-		@relationships = Relationship.where("user_one_id = ? or user_two_id = ?", user_id, user_id)
 		@friends = Relationship.includes(:user_one).where("user_one_id = ? or user_two_id = ?", user_id, user_id)
 		if f = User.find_friend(@user, @relationship)
 			@friend = User.find(f)
 		end
+	end
+
+	def friendlist
+		if params[:user_id]
+      @user = User.find(params[:user_id])
+			user_id = params[:user_id]
+    else
+      @user = current_user
+			user_id = current_user.id
+    end
+
+		@relationships = Relationship.where("user_one_id = ? or user_two_id = ?", user_id, user_id)
 	end
 
 private

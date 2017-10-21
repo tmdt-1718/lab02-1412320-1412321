@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   resources :users, only: [ :member ] do
   	get 'home'
     get :friendship
+    get 'friendlist'
   end
   resources :relationships, only: [:create, :destroy, :update]
-  
+
   resources :conversations, only: [:index, :show] do
     resources :messages, only: [:create]
   end
