@@ -1,3 +1,15 @@
-<h4 class="card-title"><%= gravatar_for(@message.user, size: 40)%> <%= @message.user.name %></h4>
-<h6 class="card-subtitle mb-2 text-muted"><%= localtime @message.created_at %></h6>
+<h4 class="card-title">
+  <%= gravatar_for(@message.user, size: 40)%> 
+  From: <%= @message.user.name %>
+  <span class="card-subtitle mb-2 text-muted"> (<%= @message.user.email %>)</span>
+</h4>
+<hr/>
+<h6 class="card-subtitle mb-2 text-muted">
+  To: <%= @recipient.name %> (<%= @recipient.email %>)
+</h6>
+<h6 class="card-subtitle mb-2 text-muted">Sent at: <%= localtime @message.created_at %></h6>
+<% if @message.seen_at %>
+  <h6 class="card-subtitle mb-2 text-muted">Seen at: <%= localtime @message.seen_at %></h6>  
+<% end %>
+<hr/>
 <div class="card-text"><%= simple_format @message.content %></div>

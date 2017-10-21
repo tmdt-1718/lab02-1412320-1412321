@@ -17,7 +17,11 @@
       <div class="conversation-box">
         <div class="card border-primary">
           <div class="card-body" id="message-window">
-            <%= render 'message_list' %>
+            <% if @message %>
+              <%= render 'message_content' %>
+            <% else %>
+              <%= render 'message_list' %>
+            <% end %>
           </div>
         </div>
       </div>
