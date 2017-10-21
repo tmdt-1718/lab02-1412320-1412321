@@ -7,9 +7,6 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <% if current_user %>
       <li class="nav-item">
-        <%= link_to 'Home', user_home_path(current_user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
         <%= link_to 'Friend list', friendlist_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
