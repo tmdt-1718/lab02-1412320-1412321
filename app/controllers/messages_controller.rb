@@ -28,9 +28,12 @@ class MessagesController < ApplicationController
       # For loading messages
       conversations = Conversation.get_all(current_user.id)
       @messages = conversations.collect(&:messages)
-      @messages.flatten!.uniq!
-      @messages.delete_if { |message| message.user == current_user }
-      @messages.sort!{ |a, b| b.created_at <=> a.created_at }
+      @messages.flatten!
+      if @messages
+        @messages.uniq!
+        @messages.delete_if { |message| message.user == current_user }
+        @messages.sort!{ |a, b| b.created_at <=> a.created_at }
+      end
     end
     # For create new message
     @new_message = Message.new
