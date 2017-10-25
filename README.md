@@ -6,7 +6,7 @@ Thành viên:
 * [x] **1412320** Lê Quốc Minh (1412320)
 * [x] **1412321** Lương Nhật Minh (1412321)
 
-URL: **URL hosting của bài tập**
+URL: **https://m2mess.herokuapp.com/**
 
 ## Yêu cầu
 
@@ -40,12 +40,13 @@ Yêu cầu **không bắt buộc**:
 
 Liệt kê các **yêu cầu nâng cao** đã thực hiện:
 * [x] Tạo conversation chat giữa các user (**1412321**)
+* [x] Accept friend request (**1412320**)
 
 ## Demo
 
 Link ảnh GIF demo ứng dụng:
 
-![Video Walkthrough](demo.gif)
+[Video Walkthrough](https://i.imgur.com/MpwCaV8.gifv)
 
 Tạo ảnh GIF với chương trình [LiceCap](http://www.cockos.com/licecap/).
 
